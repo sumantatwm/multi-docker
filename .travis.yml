@@ -2,10 +2,10 @@ sudo: required
 services:
   - docker
 before_install:
-  - docker build -t reactTest -f ./client/Dockerfile.dev ./client
+  - docker build -t react -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run reactTest npm test -- --coverage
+  - docker run react npm test -- --coverage
 
 after_success:
   - docker build -t multi-client ./client
