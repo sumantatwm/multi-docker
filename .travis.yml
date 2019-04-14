@@ -2,18 +2,18 @@ sudo: required
 services:
   - docker
 before_install:
-  - docker build -t testreact -f ./client/Dockerfile.dev ./client
+  - docker build -t sumantatwm/react -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run testreact npm test -- --coverage
+  - docker run sumantatwm/react npm test -- --coverage
 
 after_success:
-  - docker build -t multi-client ./client
-  - docker build -t multi-nginx ./nginx
-  - docker build -t multi-server ./server
-  - docker build -t multi-worker ./worker
+  - docker build -t sumantatwm/multi-client ./client
+  - docker build -t sumantatwm/multi-nginx ./nginx
+  - docker build -t sumantatwm/multi-server ./server
+  - docker build -t sumantatwm/multi-worker ./worker
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-  - docker push multi-client
-  - docker push multi-nginx
-  - docker push multi-server
-  - docker push multi-worker
+  - docker push sumantatwm/multi-client
+  - docker push sumantatwm/multi-nginx
+  - docker push sumantatwm/multi-server
+  - docker push sumantatwm/multi-worker
